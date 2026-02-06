@@ -1497,23 +1497,22 @@
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
             .nav-links {
-                position: fixed;
+                position: absolute;
                 top: 60px;
                 left: 0;
                 right: 0;
-                width: 100%;
-                background: rgba(255, 255, 255, 0.98);
-                backdrop-filter: blur(10px);
+                width: calc(100% - 20px);
+                background: white;
                 flex-direction: column;
                 gap: 0;
                 list-style: none;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-                z-index: 999;
-                padding: 0;
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+                z-index: 1000;
+                padding: 0.5rem 10px;
                 border-bottom: 1px solid var(--border);
-                max-height: calc(100vh - 60px);
+                display: none;
+                max-height: calc(100vh - 80px);
                 overflow-y: auto;
-                display: none !important;
             }
 
             .nav-links.active {
@@ -2586,22 +2585,6 @@
         // Observe elements with reveal classes
         document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .project-card, .experience-card').forEach(el => {
             observer.observe(el);
-        });
-
-        // Mobile menu toggle
-        document.querySelector('.menu-toggle').addEventListener('click', function () {
-            this.classList.toggle('active');
-            document.querySelector('.nav-links').classList.toggle('active');
-            document.body.style.overflow = document.querySelector('.nav-links').classList.contains('active') ? 'hidden' : '';
-        });
-
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.querySelector('.menu-toggle').classList.remove('active');
-                document.querySelector('.nav-links').classList.remove('active');
-                document.body.style.overflow = '';
-            });
         });
 
         // Enhanced navbar scroll effect
