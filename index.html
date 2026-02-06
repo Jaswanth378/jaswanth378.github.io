@@ -123,10 +123,6 @@
         }
 
         .nav-links {
-            display: flex !important;
-            gap: 2rem;
-            list-style: none;
-            align-items: center;
             margin-right: 2rem;
         }
 
@@ -235,11 +231,9 @@
         }
 
         .nav-links {
-            display: flex !important;
+            display: flex;
             gap: 2rem;
             list-style: none;
-            align-items: center;
-            margin-right: 2rem;
         }
 
         .nav-links a {
@@ -295,8 +289,6 @@
             display: none;
             flex-direction: column;
             cursor: pointer;
-            padding: 0.5rem;
-            z-index: 1002;
         }
 
         .menu-toggle span {
@@ -305,18 +297,6 @@
             background: var(--text-primary);
             margin: 3px 0;
             transition: var(--transition);
-        }
-
-        .menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translateY(12px);
-        }
-
-        .menu-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translateY(-12px);
         }
 
         /* Hero Section */
@@ -1374,14 +1354,27 @@
             border-top: 1px solid var(--border);
         }
 
-        /* Mobile nav styles moved inside media query below */
-        pointer-events: auto;
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
         }
 
-        border-radius: 50%;
-        background: var(--surface);
-        transition: var(--transition);
-        border: 1px solid var(--border);
+        .social-links a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            gap: 0.25rem;
+        }
+
+        .social-links .icon-container {
+            padding: 0.5rem;
+            border-radius: 50%;
+            background: var(--surface);
+            transition: var(--transition);
+            border: 1px solid var(--border);
         }
 
         .social-links .link-label {
@@ -1497,50 +1490,7 @@
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
             .nav-links {
-                position: absolute;
-                top: 60px;
-                left: 0;
-                right: 0;
-                width: calc(100% - 20px);
-                background: white;
-                flex-direction: column;
-                gap: 0;
-                list-style: none;
-                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-                z-index: 1000;
-                padding: 0.5rem 10px;
-                border-bottom: 1px solid var(--border);
                 display: none;
-                max-height: calc(100vh - 80px);
-                overflow-y: auto;
-            }
-
-            .nav-links.active {
-                display: flex !important;
-            }
-
-            .nav-links li {
-                width: 100%;
-                text-align: center;
-                margin: 0;
-            }
-
-            .nav-links a {
-                padding: 1rem 0;
-                width: 100%;
-                display: block;
-                color: var(--primary);
-                font-size: 1.1rem;
-                border-bottom: 1px solid var(--border-light);
-            }
-
-            .nav-links a:last-child {
-                border-bottom: none;
-            }
-
-            .nav-links a:hover {
-                background: var(--primary-light);
-                color: var(--accent);
             }
 
             .menu-toggle {
@@ -2533,32 +2483,20 @@
         const menuToggle = document.querySelector('.menu-toggle');
         const navLinks = document.querySelector('.nav-links');
 
-        if (menuToggle && navLinks) {
-            menuToggle.addEventListener('click', (e) => {
-                e.stopPropagation();
-                menuToggle.classList.toggle('active');
-                navLinks.classList.toggle('active');
-                document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
-            });
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        });
 
-            // Close mobile menu when clicking a link
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.addEventListener('click', () => {
-                    menuToggle.classList.remove('active');
-                    navLinks.classList.remove('active');
-                    document.body.style.overflow = '';
-                });
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+                document.body.style.overflow = '';
             });
-
-            // Close menu when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!e.target.closest('.menu-toggle') && !e.target.closest('.nav-links')) {
-                    menuToggle.classList.remove('active');
-                    navLinks.classList.remove('active');
-                    document.body.style.overflow = '';
-                }
-            });
-        }
+        });
 
         // Enhanced Intersection Observer for scroll animations
         const observerOptions = {
@@ -2585,6 +2523,22 @@
         // Observe elements with reveal classes
         document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .project-card, .experience-card').forEach(el => {
             observer.observe(el);
+        });
+
+        // Mobile menu toggle
+        document.querySelector('.menu-toggle').addEventListener('click', function () {
+            this.classList.toggle('active');
+            document.querySelector('.nav-links').classList.toggle('active');
+            document.body.style.overflow = document.querySelector('.nav-links').classList.contains('active') ? 'hidden' : '';
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.menu-toggle').classList.remove('active');
+                document.querySelector('.nav-links').classList.remove('active');
+                document.body.style.overflow = '';
+            });
         });
 
         // Enhanced navbar scroll effect
@@ -2777,3 +2731,6 @@
         }
     </script>
 </body>
+
+
+
