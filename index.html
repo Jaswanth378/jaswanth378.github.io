@@ -123,6 +123,10 @@
         }
 
         .nav-links {
+            display: flex !important;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
             margin-right: 2rem;
         }
 
@@ -1354,27 +1358,14 @@
             border-top: 1px solid var(--border);
         }
 
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
+        /* Mobile nav styles moved inside media query below */
+        pointer-events: auto;
         }
 
-        .social-links a {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            gap: 0.25rem;
-        }
-
-        .social-links .icon-container {
-            padding: 0.5rem;
-            border-radius: 50%;
-            background: var(--surface);
-            transition: var(--transition);
-            border: 1px solid var(--border);
+        border-radius: 50%;
+        background: var(--surface);
+        transition: var(--transition);
+        border: 1px solid var(--border);
         }
 
         .social-links .link-label {
@@ -1491,6 +1482,52 @@
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
+                position: absolute;
+                top: 60px;
+                right: 0;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.98);
+                flex-direction: column;
+                gap: 0;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+                z-index: 1001;
+                padding: 1rem 0;
+                border-bottom: 1px solid var(--border);
+                opacity: 0;
+                transform: translateY(-20px);
+                pointer-events: none;
+                transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            .nav-links.active {
+                display: flex;
+                opacity: 1;
+                transform: translateY(0);
+                pointer-events: auto;
+            }
+
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+                margin: 0;
+            }
+
+            .nav-links a {
+                padding: 1rem 0;
+                width: 100%;
+                display: block;
+                color: var(--primary);
+                font-size: 1.1rem;
+                border-bottom: 1px solid var(--border-light);
+            }
+
+            .nav-links a:last-child {
+                border-bottom: none;
+            }
+
+            .nav-links a:hover {
+                background: var(--primary-light);
+                color: var(--accent);
             }
 
             .menu-toggle {
@@ -2731,7 +2768,3 @@
         }
     </script>
 </body>
-
-
-
-
