@@ -235,9 +235,11 @@
         }
 
         .nav-links {
-            display: flex;
+            display: flex !important;
             gap: 2rem;
             list-style: none;
+            align-items: center;
+            margin-right: 2rem;
         }
 
         .nav-links a {
@@ -1495,33 +1497,27 @@
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
             .nav-links {
-                display: flex;
-                position: absolute;
+                position: fixed;
                 top: 60px;
                 left: 0;
                 right: 0;
                 width: 100%;
-                background: rgba(255, 255, 255, 0.99);
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(10px);
                 flex-direction: column;
                 gap: 0;
+                list-style: none;
                 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-                z-index: 1000;
-                padding: 0.5rem 0;
+                z-index: 999;
+                padding: 0;
                 border-bottom: 1px solid var(--border);
-                opacity: 0;
-                transform: translateY(-20px);
-                pointer-events: none;
-                visibility: hidden;
-                transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.3s cubic-bezier(0.4, 0, 0.2, 1);
                 max-height: calc(100vh - 60px);
                 overflow-y: auto;
+                display: none !important;
             }
 
             .nav-links.active {
-                opacity: 1;
-                transform: translateY(0);
-                pointer-events: auto;
-                visibility: visible;
+                display: flex !important;
             }
 
             .nav-links li {
@@ -2538,20 +2534,32 @@
         const menuToggle = document.querySelector('.menu-toggle');
         const navLinks = document.querySelector('.nav-links');
 
-        menuToggle.addEventListener('click', () => {
-            menuToggle.classList.toggle('active');
-            navLinks.classList.toggle('active');
-            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
-        });
-
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                menuToggle.classList.remove('active');
-                navLinks.classList.remove('active');
-                document.body.style.overflow = '';
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                menuToggle.classList.toggle('active');
+                navLinks.classList.toggle('active');
+                document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
             });
-        });
+
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    menuToggle.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.menu-toggle') && !e.target.closest('.nav-links')) {
+                    menuToggle.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        }
 
         // Enhanced Intersection Observer for scroll animations
         const observerOptions = {
