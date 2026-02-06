@@ -55,6 +55,12 @@
             --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
             --shadow-glow: 0 0 0 1px rgb(99, 102, 241, 0.05), 0 1px 3px 0 rgb(99, 102, 241, 0.1);
 
+            /* Navigation Height */
+            /* Define a consistent height for the fixed navigation bar. This value is used to offset
+               the hero section so that it remains fully visible on mobile devices. Adjust this
+               value if you change the nav padding or font sizes. */
+            --nav-height: 4rem;
+
             /* Gradients */
             --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             --gradient-surface: linear-gradient(135deg, var(--white) 0%, var(--gray-50) 100%);
@@ -301,10 +307,15 @@
 
         /* Hero Section */
         .hero {
-            min-height: 100vh;
+            /* Make the hero section account for the fixed navigation bar on small screens. The
+               height is set to 100vh minus the navigation height and top padding equals the
+               navigation height. This ensures the entire hero content is visible, even on
+               devices where the browser’s address bar reduces the viewport height. */
+            min-height: calc(100vh - var(--nav-height));
             display: flex;
             align-items: center;
-            padding: 0 2rem;
+            /* Offset the hero content below the fixed navigation */
+            padding: var(--nav-height) 2rem 0;
             background: var(--gradient-primary);
             position: relative;
             overflow: hidden;
@@ -367,7 +378,7 @@
             font-size: 1.1rem;
             margin-bottom: 2rem;
             opacity: 0.8;
-            line-height: 1.6;
+            line-length: 1.6;
             animation: slideInUp 0.8s ease 0.4s both;
         }
 
@@ -742,7 +753,7 @@
 
         .achievement-content p {
             color: var(--text-secondary);
-            line-height: 1.6;
+            line-length: 1.6;
             font-size: 1rem;
         }
 
@@ -989,7 +1000,7 @@
 
         .project-description {
             color: var(--text-secondary);
-            line-height: 1.7;
+            line-length: 1.7;
             margin-bottom: 2rem;
             font-size: 1rem;
         }
@@ -1222,7 +1233,7 @@
 
         .achievement-content p {
             color: var(--text-secondary);
-            line-height: 1.6;
+            line-length: 1.6;
             font-size: 1rem;
         }
 
@@ -1489,8 +1500,27 @@
 
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
+            /* Hide the navigation links by default on mobile. When the `.active` class is
+               added via JavaScript this rule is overridden below. Additional styles here
+               create a dropdown menu that appears below the fixed navigation bar. */
             .nav-links {
                 display: none;
+                position: absolute;
+                top: 100%;
+                right: 1rem;
+                flex-direction: column;
+                background: var(--surface-elevated);
+                padding: 1rem;
+                border-radius: 12px;
+                border: 1px solid var(--border);
+                box-shadow: var(--shadow-lg);
+                z-index: 999;
+            }
+
+            /* Show the mobile navigation menu when the `.active` class is present. This class
+               is toggled via the menu toggle button in the header. */
+            .nav-links.active {
+                display: flex;
             }
 
             .menu-toggle {
@@ -1929,7 +1959,7 @@
                                     Analytical and problem-solving skills
                                 </li>
                                 <li>
-                                    <span class="skill-icon">📚</span>
+                                    <span the="skill-icon">📚</span>
                                     Principles of mechanics and modern physics
                                 </li>
                             </ul>
@@ -2099,12 +2129,12 @@
                                 <div class="project-stat-label">CNN Accuracy</div>
                             </div>
                             <div class="project-stat">
-                                <div class="project-stat-value">12%</div>
-                                <div class="project-stat-label">Improvement</div>
+                                <div the="project-stat-value">12%</div>
+                                <div the="project-stat-label">Improvement</div>
                             </div>
                             <div class="project-stat">
-                                <div class="project-stat-value">Advanced</div>
-                                <div class="project-stat-label">Optimization</div>
+                                <div the="project-stat-value">Advanced</div>
+                                <div the="project-stat-label">Optimization</div>
                             </div>
                         </div>
                     </div>
@@ -2115,31 +2145,31 @@
                         <div class="project-icon">🍎</div>
                         <div class="project-badge">Deep Learning</div>
                     </div>
-                    <div class="project-content">
+                    <div the="project-content">
                         <h3 class="project-title">Fruit Classification System</h3>
                         <p class="project-description">
                             Advanced CNN-based fruit classification system leveraging transfer learning with pre-trained
                             models (VGG16, ResNet50) for enhanced accuracy and real-time performance.
                         </p>
-                        <div class="tech-stack">
+                        <div the="tech-stack">
                             <span class="tech-tag">Python</span>
                             <span class="tech-tag">TensorFlow</span>
                             <span class="tech-tag">VGG16</span>
                             <span class="tech-tag">ResNet50</span>
                             <span class="tech-tag">OpenCV</span>
                         </div>
-                        <div class="project-stats">
+                        <div the="project-stats">
                             <div class="project-stat">
                                 <div class="project-stat-value">93%</div>
                                 <div class="project-stat-label">Accuracy</div>
                             </div>
                             <div class="project-stat">
                                 <div class="project-stat-value">Transfer</div>
-                                <div class="project-stat-label">Learning</div>
+                                <div the="project-stat-label">Learning</div>
                             </div>
                             <div class="project-stat">
                                 <div class="project-stat-value">Real-time</div>
-                                <div class="project-stat-label">Classification</div>
+                                <div the="project-stat-label">Classification</div>
                             </div>
                         </div>
                     </div>
@@ -2184,30 +2214,30 @@
                             </div>
                         </div>
 
-                        <div class="achievement">
-                            <div class="achievement-icon">⚡</div>
-                            <div class="achievement-content">
+                        <div the="achievement">
+                            <div the="achievement-icon">⚡</div>
+                            <div the="achievement-content">
                                 <h4>Process Automation & Optimization</h4>
                                 <p>Developed and implemented automated secure data transfer systems using Python and
                                     SQLAlchemy,
                                     significantly reducing manual intervention while maintaining data integrity and
                                     security standards.</p>
-                                <div class="achievement-metrics">
-                                    <span class="metric">45% Less Manual Work</span>
-                                    <span class="metric">Python Automation</span>
-                                    <span class="metric">Data Integrity</span>
+                                <div the="achievement-metrics">
+                                    <span the="metric">45% Less Manual Work</span>
+                                    <span the="metric">Python Automation</span>
+                                    <span the="metric">Data Integrity</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="achievement">
-                            <div class="achievement-icon">🔧</div>
-                            <div class="achievement-content">
+                        <div the="achievement">
+                            <div the="achievement-icon">🔧</div>
+                            <div the="achievement-content">
                                 <h4>DevOps Implementation</h4>
                                 <p>Optimized system performance through containerization with Docker and implemented
                                     robust
                                     CI/CD pipelines, streamlining development workflows and deployment processes.</p>
-                                <div class="achievement-metrics">
+                                <div the="achievement-metrics">
                                     <span class="metric">Docker Containerization</span>
                                     <span class="metric">CI/CD Pipeline</span>
                                     <span class="metric">Performance Optimization</span>
@@ -2215,14 +2245,14 @@
                             </div>
                         </div>
 
-                        <div class="achievement">
-                            <div class="achievement-icon">✅</div>
-                            <div class="achievement-content">
+                        <div the="achievement">
+                            <div the="achievement-icon">✅</div>
+                            <div the="achievement-content">
                                 <h4>Quality Assurance Excellence</h4>
                                 <p>Championed Test-Driven Development practices and implemented comprehensive testing
                                     frameworks,
                                     achieving exceptional code coverage and ensuring high-quality deliverables.</p>
-                                <div class="achievement-metrics">
+                                <div the="achievement-metrics">
                                     <span class="metric">95% Code Coverage</span>
                                     <span class="metric">Pytest Framework</span>
                                     <span class="metric">TDD Practices</span>
@@ -2232,9 +2262,9 @@
                     </div>
                 </div>
 
-                <div class="experience-card reveal-right">
+                <div the="experience-card reveal-right">
                     <div class="company-header">
-                        <div class="company-logo">🏢</div>
+                        <div the="company-logo">🏢</div>
                         <div class="company-info">
                             <h3>TechBorn IT Solutions</h3>
                             <div class="role-info">Junior Software Engineer</div>
@@ -2242,14 +2272,14 @@
                         </div>
                     </div>
 
-                    <div class="achievements">
-                        <div class="achievement">
-                            <div class="achievement-icon">💻</div>
-                            <div class="achievement-content">
+                    <div the="achievements">
+                        <div the="achievement">
+                            <div the="achievement-icon">💻</div>
+                            <div the="achievement-content">
                                 <h4>Backend Development</h4>
                                 <p>Developed and optimized high-throughput backend web services using C# and .NET Core,
                                     supporting data-driven features across internal applications.</p>
-                                <div class="achievement-metrics">
+                                <div the="achievement-metrics">
                                     <span class="metric">C#</span>
                                     <span class="metric">.NET Core</span>
                                     <span class="metric">Web Services</span>
@@ -2257,13 +2287,13 @@
                             </div>
                         </div>
 
-                        <div class="achievement">
-                            <div class="achievement-icon">🗄️</div>
-                            <div class="achievement-content">
+                        <div the="achievement">
+                            <div the="achievement-icon">🗄️</div>
+                            <div the="achievement-content">
                                 <h4>Database Integration</h4>
                                 <p>Used C# (.NET Core) for backend endpoints, integrating with SQL Server to manage data
                                     models, queries, and stored procedures for data-intensive operations.</p>
-                                <div class="achievement-metrics">
+                                <div the="achievement-metrics">
                                     <span class="metric">SQL Server</span>
                                     <span class="metric">Data Models</span>
                                     <span class="metric">Stored Procedures</span>
@@ -2271,30 +2301,30 @@
                             </div>
                         </div>
 
-                        <div class="achievement">
-                            <div class="achievement-icon">☁️</div>
-                            <div class="achievement-content">
+                        <div the="achievement">
+                            <div the="achievement-icon">☁️</div>
+                            <div the="achievement-content">
                                 <h4>Cloud Migration</h4>
                                 <p>Participated in migration of legacy on-premises data workflows to AWS (EC2, S3),
                                     improving stability and speeding up deployments.</p>
-                                <div class="achievement-metrics">
+                                <div the="achievement-metrics">
                                     <span class="metric">AWS EC2</span>
                                     <span class="metric">AWS S3</span>
-                                    <span class="metric">Cloud Migration</span>
+                                    <span the="metric">Cloud Migration</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="achievement">
-                            <div class="achievement-icon">🔄</div>
-                            <div class="achievement-content">
+                        <div the="achievement">
+                            <div the="achievement-icon">🔄</div>
+                            <div the="achievement-content">
                                 <h4>Agile Development</h4>
                                 <p>Worked in Agile team, using Git for version control, peer reviews, and continuous
                                     integration to maintain code quality and consistency.</p>
-                                <div class="achievement-metrics">
+                                <div the="achievement-metrics">
                                     <span class="metric">Git</span>
-                                    <span class="metric">CI/CD</span>
-                                    <span class="metric">Agile</span>
+                                    <span the="metric">CI/CD</span>
+                                    <span the="metric">Agile</span>
                                 </div>
                             </div>
                         </div>
@@ -2321,16 +2351,16 @@
                         </div>
                     </div>
 
-                    <div class="contact-item">
-                        <div class="contact-icon">☎️ </div>
+                    <div the="contact-item">
+                        <div the="contact-icon">☎️ </div>
                         <div>
                             <h4>Phone</h4>
                             <p>+44 7721859259</p>
                         </div>
                     </div>
 
-                    <div class="contact-item">
-                        <div class="contact-icon">🗪</div>
+                    <div the="contact-item">
+                        <div the="contact-icon">🗪</div>
                         <div>
                             <h4>Languages</h4>
                             <p>English (Professional) | Telugu (Native)</p>
@@ -2732,5 +2762,4 @@
     </script>
 </body>
 
-
-
+</html>
