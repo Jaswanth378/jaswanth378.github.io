@@ -576,43 +576,55 @@
       align-items: center;
     }
 
-    .profile-card {
-      background: var(--surface-elevated);
-      padding: 2rem;
-      border-radius: 20px;
-      box-shadow: var(--shadow-lg);
-      text-align: center;
-      border: 1px solid var(--border);
-    }
+  .profile-card {
+  background: var(--surface-elevated);
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+  border: 1px solid var(--border);
+}
 
-    .profile-img {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      background: var(--gradient-primary);
-      margin: 0 auto 1.5rem;
-      padding: 6px;
-      /* creates gradient border */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+/* Same look, slightly more polished ring */
+.profile-img {
+  width: clamp(180px, 22vw, 240px);
+  height: clamp(180px, 22vw, 240px);
+  border-radius: 50%;
+  background: var(--gradient-primary);
+  margin: 0 auto 1.5rem;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    .profile-img img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-    }
+  /* polish */
+  box-shadow: var(--shadow-md);
+  transform: translateZ(0); /* smoother hover on some devices */
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
 
-    .profile-img {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+/* inner “separator” so the gradient ring looks crisp */
+.profile-img img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
 
-    .profile-img:hover {
-      transform: scale(1.05);
-      box-shadow: var(--shadow-xl);
-    }
+  /* polish */
+  border: 2px solid rgba(255, 255, 255, 0.65);
+}
+
+[data-theme="dark"] .profile-img img {
+  border: 2px solid rgba(15, 23, 42, 0.35);
+}
+
+/* Hover only on devices that actually hover (prevents weird mobile behavior) */
+@media (hover: hover) and (pointer: fine) {
+  .profile-img:hover {
+    transform: scale(1.04);
+    box-shadow: var(--shadow-xl);
+  }
+}
 
 
     .about-text h3 {
@@ -2751,3 +2763,4 @@
 </body>
 
 </html>
+
