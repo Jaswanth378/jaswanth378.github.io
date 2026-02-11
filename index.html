@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jaswanth KS | AI Engineer & Software Engineer</title>
 
+
   <style>
     * {
       margin: 0;
@@ -113,7 +114,7 @@
       border-bottom: 1px solid var(--border);
       z-index: 3000;
       transition: var(--transition);
-      min-height: var(--nav-height); /* FIX */
+      min-height: var(--nav-height);
       display: flex;
       align-items: center;
     }
@@ -122,11 +123,16 @@
       background: rgba(15, 23, 42, 0.95);
     }
 
+    /* When scrolled the nav drops its shadow via a class rather than inline style */
+    nav.scrolled {
+      box-shadow: none;
+    }
+
     .nav-container {
       max-width: 1200px;
       width: 100%;
       margin: 0 auto;
-      padding: 0.75rem 1rem; /* slightly tighter to stabilize height */
+      padding: 0.75rem 1rem;
       display: flex;
       justify-content: flex-end;
       align-items: center;
@@ -215,21 +221,25 @@
     }
 
     @keyframes cubeFloat {
+
       0%,
       100% {
         transform: rotateY(-25deg) rotateX(10deg) translateY(0px);
       }
+
       50% {
         transform: rotateY(-25deg) rotateX(10deg) translateY(-6px);
       }
     }
 
     @keyframes shadowPulse {
+
       0%,
       100% {
         transform: rotateX(90deg) translateZ(-10px) scale(1);
         opacity: 0.4;
       }
+
       50% {
         transform: rotateX(90deg) translateZ(-10px) scale(0.8);
         opacity: 0.2;
@@ -342,15 +352,22 @@
       position: relative;
       overflow: hidden;
 
-      /* FIX: account for fixed nav + correct mobile viewport behavior */
+      /* Account for fixed nav; use dynamic viewport units */
       min-height: calc(100dvh - var(--nav-height));
       padding-top: var(--nav-height);
     }
 
-    /* fallback for older browsers */
+    /* Fallback for older browsers */
     @supports not (height: 100dvh) {
       .hero {
         min-height: calc(100vh - var(--nav-height));
+      }
+    }
+
+    /* Use small viewport height when supported to avoid iOS toolbar issues */
+    @supports (height: 100svh) {
+      .hero {
+        min-height: calc(100svh - var(--nav-height));
       }
     }
 
@@ -1407,6 +1424,7 @@
         opacity: 0;
         transform: translateY(30px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -1414,10 +1432,12 @@
     }
 
     @keyframes float {
+
       0%,
       100% {
         transform: translateY(0px);
       }
+
       50% {
         transform: translateY(-20px);
       }
@@ -1427,16 +1447,19 @@
       0% {
         transform: translateX(-100px);
       }
+
       100% {
         transform: translateX(100px);
       }
     }
 
     @keyframes pulse {
+
       0%,
       100% {
         transform: scale(1);
       }
+
       50% {
         transform: scale(1.05);
       }
@@ -1447,6 +1470,7 @@
         opacity: 0;
         transform: scale(0.8);
       }
+
       100% {
         opacity: 1;
         transform: scale(1);
@@ -1490,7 +1514,6 @@
     /* Mobile Responsiveness */
     @media (max-width: 768px) {
       .nav-links {
-        /* FIX: dropdown menu on mobile */
         display: none;
         position: fixed;
         top: var(--nav-height);
@@ -1512,7 +1535,7 @@
       }
 
       .nav-links.active {
-        display: flex; /* IMPORTANT */
+        display: flex;
       }
 
       .nav-links a {
@@ -1523,7 +1546,7 @@
         display: flex;
       }
 
-      /* FIX: Home section fits better on mobile */
+      /* Home section fits better on mobile */
       .hero {
         padding-left: 1rem;
         padding-right: 1rem;
@@ -1562,7 +1585,7 @@
         justify-content: center;
       }
 
-      /* IMPORTANT: hide large code window on mobile to avoid “half visible” feel */
+      /* Hide large code window on mobile */
       .hero-visual {
         display: none;
       }
@@ -1616,6 +1639,26 @@
       .module-grid {
         grid-template-columns: 1fr;
       }
+
+      /* Additional mobile fixes */
+      .hero {
+        padding-top: calc(var(--nav-height) + 1rem);
+      }
+
+      .hero-badge {
+        margin-top: 0.5rem;
+      }
+
+      .contact-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .contact-item h4,
+      .contact-item p {
+        text-align: center;
+      }
     }
 
     @media (max-width: 480px) {
@@ -1629,6 +1672,24 @@
 
       .experience-card {
         padding: 1.5rem;
+      }
+
+      /* Smaller footer and icons on very small screens */
+      footer {
+        padding: 1rem;
+      }
+
+      .social-links {
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .social-links .icon-container {
+        padding: 0.3rem;
+      }
+
+      .social-links .link-label {
+        font-size: 0.6rem;
       }
     }
   </style>
@@ -1738,7 +1799,8 @@
         <div class="about-text">
           <h3>Bridging Data Science & Software Engineering</h3>
           <p>
-            As a recent MSc graduate in Data Science and Artificial Intelligence along with 3 years of hands-on experience
+            As a recent MSc graduate in Data Science and Artificial Intelligence along with 3 years of hands-on
+            experience
             as a Software Engineer, I bring a unique blend of theoretical knowledge and practical
             expertise to every project.
           </p>
@@ -1922,7 +1984,8 @@
 
             <div class="skills-gained">
               <ul class="skills-list">
-                <li><span class="skill-icon">🧮</span>Fundamentals of programming, algorithms, and software development</li>
+                <li><span class="skill-icon">🧮</span>Fundamentals of programming, algorithms, and software development
+                </li>
                 <li><span class="skill-icon">🔍</span>Analytical and problem-solving skills</li>
                 <li><span class="skill-icon">📚</span>Principles of mechanics and modern physics</li>
               </ul>
@@ -1945,7 +2008,8 @@
           <div class="achievement-icon">📋</div>
           <div class="achievement-content">
             <h3 class="achievement-title">Class Representative</h3>
-            <p class="achievement-description">Served as Class Representative in B.Sc, demonstrating leadership in managing academic and administrative responsibilities.</p>
+            <p class="achievement-description">Served as Class Representative in B.Sc, demonstrating leadership in
+              managing academic and administrative responsibilities.</p>
           </div>
         </div>
 
@@ -1953,7 +2017,8 @@
           <div class="achievement-icon">🤝</div>
           <div class="achievement-content">
             <h3 class="achievement-title">Secretary - TARA</h3>
-            <p class="achievement-description">Successfully organized events while managing society communications, meetings, and student engagement.</p>
+            <p class="achievement-description">Successfully organized events while managing society communications,
+              meetings, and student engagement.</p>
           </div>
         </div>
 
@@ -1961,7 +2026,8 @@
           <div class="achievement-icon">🎤</div>
           <div class="achievement-content">
             <h3 class="achievement-title">Technical Paper Presentation</h3>
-            <p class="achievement-description">Presented a technical paper at SVUICE-2K19, effectively communicating complex concepts to the technical audience.</p>
+            <p class="achievement-description">Presented a technical paper at SVUICE-2K19, effectively communicating
+              complex concepts to the technical audience.</p>
           </div>
         </div>
 
@@ -1969,7 +2035,8 @@
           <div class="achievement-icon">🏆</div>
           <div class="achievement-content">
             <h3 class="achievement-title">Hackathon Success</h3>
-            <p class="achievement-description">Led a team of 5 to secure a top 3 finish in a 24-hour hackathon, showcasing teamwork and innovation.</p>
+            <p class="achievement-description">Led a team of 5 to secure a top 3 finish in a 24-hour hackathon,
+              showcasing teamwork and innovation.</p>
           </div>
         </div>
       </div>
@@ -2104,7 +2171,8 @@
           <div class="project-content">
             <h3 class="project-title">Fruit Classification System</h3>
             <p class="project-description">
-              Advanced CNN-based fruit classification system leveraging transfer learning with pre-trained models (VGG16,
+              Advanced CNN-based fruit classification system leveraging transfer learning with pre-trained models
+              (VGG16,
               ResNet50) for enhanced accuracy and real-time performance.
             </p>
             <div class="tech-stack">
@@ -2174,7 +2242,8 @@
               <div class="achievement-content">
                 <h4>Process Automation & Optimization</h4>
                 <p>Developed and implemented automated secure data transfer systems using Python and SQLAlchemy,
-                  significantly reducing manual intervention while maintaining data integrity and security standards.</p>
+                  significantly reducing manual intervention while maintaining data integrity and security standards.
+                </p>
                 <div class="achievement-metrics">
                   <span class="metric">45% Less Manual Work</span>
                   <span class="metric">Python Automation</span>
@@ -2184,10 +2253,11 @@
             </div>
 
             <div class="achievement">
-              <div class="achievement-icon">🔧</div>
+              <div the="achievement-icon">🔧</div>
               <div class="achievement-content">
                 <h4>DevOps Implementation</h4>
-                <p>Optimized system performance through containerization with Docker and implemented robust CI/CD pipelines,
+                <p>Optimized system performance through containerization with Docker and implemented robust CI/CD
+                  pipelines,
                   streamlining development workflows and deployment processes.</p>
                 <div class="achievement-metrics">
                   <span class="metric">Docker Containerization</span>
@@ -2270,7 +2340,8 @@
               <div class="achievement-icon">🔄</div>
               <div class="achievement-content">
                 <h4>Agile Development</h4>
-                <p>Worked in Agile team, using Git for version control, peer reviews, and continuous integration to maintain code quality and consistency.</p>
+                <p>Worked in Agile team, using Git for version control, peer reviews, and continuous integration to
+                  maintain code quality and consistency.</p>
                 <div class="achievement-metrics">
                   <span class="metric">Git</span>
                   <span class="metric">CI/CD</span>
@@ -2313,7 +2384,7 @@
             <div class="contact-icon">🗪</div>
             <div>
               <h4>Languages</h4>
-              <p>English (Professional) </br> Telugu (Native)</p>
+              <p>English (Professional) <br> Telugu (Native)</p>
             </div>
           </div>
         </div>
@@ -2392,7 +2463,7 @@
     document.documentElement.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
     document.querySelector('.theme-toggle').textContent = isDarkMode ? '☀️' : '🌙';
 
-    // Smooth scrolling for navigation links (kept)
+    // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -2444,9 +2515,6 @@
       }
     });
 
-    /* ============================
-       FIX: Mobile menu toggle (single, clean implementation)
-       ============================ */
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');
 
@@ -2508,13 +2576,14 @@
       observer.observe(el);
     });
 
-    // Enhanced navbar scroll effect (kept minimal)
+    // Navbar scroll effect using class to avoid inline styles (fixes theme toggle lag)
     window.addEventListener('scroll', () => {
       const nav = document.querySelector('nav');
       const currentScroll = window.pageYOffset;
       if (currentScroll > 100) {
-        nav.style.background = isDarkMode ? 'rgba(15, 23, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)';
-        nav.style.boxShadow = 'none';
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
       }
     });
 
@@ -2528,7 +2597,7 @@
       }
     });
 
-    // Add dynamic typing effect to hero section
+    // Dynamic typing effect to hero section
     const heroSubtitle = document.querySelector('.hero-subtitle');
     const roles = ['AI Engineer', 'Data Scientist', 'Machine Learning Engineer'];
     let currentRole = 0;
@@ -2662,8 +2731,3 @@
 </body>
 
 </html>
-
-
-
-
-
